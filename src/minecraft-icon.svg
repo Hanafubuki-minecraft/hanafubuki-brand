@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Исходник иконки сервера Minecraft. build.py рендерит его в 64×64 и сводит цвета к палитре без сглаживания.
+       Здесь только крупные формы: тонкие линии в 64px не читаются. -->
+  <defs>
+    <style>
+      .bg     { fill: #1B1530; }
+      .heart  { fill: #8E2A5B; }
+      .anther { fill: #FFCF6B; }
+    </style>
+    <linearGradient id="petalGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="-100">
+      <stop offset="0" stop-color="#E4628F"/><stop offset="0.45" stop-color="#F7A1C0"/><stop offset="1" stop-color="#FFE1EC"/>
+    </linearGradient>
+    <path id="petal" fill="url(#petalGrad)"
+      d="M0,0 C-24,-10 -44,-46 -38,-76 C-35,-93 -20,-104 -9,-99 L0,-86 L9,-99 C20,-104 35,-93 38,-76 C44,-46 24,-10 0,0 Z"/>
+  </defs>
+  <rect class="bg" width="64" height="64"/>
+  <g transform="translate(28,34) scale(0.245) rotate(-12)">
+    <use href="#petal"/><use href="#petal" transform="rotate(72)"/><use href="#petal" transform="rotate(144)"/>
+    <use href="#petal" transform="rotate(216)"/><use href="#petal" transform="rotate(288)"/>
+    <!-- швы между лепестками: без них в 64px цветок сливается в пятно -->
+    <g stroke="#C94F7C" stroke-width="6" stroke-linecap="round">
+      <line x1="0" y1="-22" x2="0" y2="-62" transform="rotate(36)"/><line x1="0" y1="-22" x2="0" y2="-62" transform="rotate(108)"/>
+      <line x1="0" y1="-22" x2="0" y2="-62" transform="rotate(180)"/><line x1="0" y1="-22" x2="0" y2="-62" transform="rotate(252)"/>
+      <line x1="0" y1="-22" x2="0" y2="-62" transform="rotate(324)"/>
+    </g>
+    <circle class="heart" r="20"/>
+    <circle class="anther" cx="0" cy="-30" r="7"/><circle class="anther" cx="28" cy="-9" r="7"/>
+    <circle class="anther" cx="17" cy="24" r="7"/><circle class="anther" cx="-17" cy="24" r="7"/><circle class="anther" cx="-28" cy="-9" r="7"/>
+  </g>
+  <use href="#petal" transform="translate(50,14) rotate(62) scale(0.11)"/>
+  <use href="#petal" transform="translate(54,27) rotate(125) scale(0.075)"/>
+</svg>

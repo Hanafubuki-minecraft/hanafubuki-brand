@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Иконка Discord-сервера в стиле чат-стикера: белая «вырубка» вокруг, как у стикеров в мессенджерах,
+       плоские цвета, тёмный контур, тень под стикером. Фон тёмный, как у основного логотипа.
+       Discord обрезает в круг: важное держим внутри круга r≈210 от центра (256,256). -->
+  <defs>
+    <!-- ПАЛИТРА -->
+    <style>
+      .bg      { fill: #1B1530; }   /* фон — как у основного логотипа */
+      .bg-dot  { fill: #3A2A5C; }   /* узор на фоне */
+      .shadow  { fill: #000000; stroke: #000000; stroke-width: 26; stroke-linejoin: round; opacity: .38; }  /* тень под стикером */
+      .cut     { fill: #FFFFFF; stroke: #FFFFFF; stroke-width: 26; stroke-linejoin: round; }  /* белая вырубка стикера */
+      .ink     { fill: none; stroke: #3A1838; stroke-linejoin: round; stroke-linecap: round; }  /* контур */
+      .petal   { fill: #FFF3F7; }   /* лепесток */
+      .petal-2 { fill: #FFD6E5; }   /* тень на лепестке */
+      .center  { fill: #FFCF6B; stroke: #3A1838; stroke-width: 9; }
+      .dot     { fill: #3A1838; }
+    </style>
+    <!-- форма лепестка (та же, что в основном логотипе) -->
+    <path id="petal"
+      d="M0,0 C-24,-10 -44,-46 -38,-76 C-35,-93 -20,-104 -9,-99 L0,-86 L9,-99 C20,-104 35,-93 38,-76 C44,-46 24,-10 0,0 Z"/>
+    <!-- полутень на одной стороне лепестка -->
+    <path id="petal-half" d="M0,0 C24,-10 44,-46 38,-76 C35,-93 20,-104 9,-99 L0,-86 Z"/>
+    <g id="five">
+      <use href="#petal"/><use href="#petal" transform="rotate(72)"/><use href="#petal" transform="rotate(144)"/>
+      <use href="#petal" transform="rotate(216)"/><use href="#petal" transform="rotate(288)"/>
+    </g>
+    <g id="five-half">
+      <use href="#petal-half"/><use href="#petal-half" transform="rotate(72)"/><use href="#petal-half" transform="rotate(144)"/>
+      <use href="#petal-half" transform="rotate(216)"/><use href="#petal-half" transform="rotate(288)"/>
+    </g>
+    <!-- цветок-стикер: тень → толстый внешний контур → заливка → тонкие швы → центр -->
+    <g id="sticker-blossom">
+      <use href="#five" class="shadow" transform="translate(4,8)"/>
+      <use href="#five" class="cut"/>
+      <use href="#five" class="ink" stroke-width="9"/>
+      <use href="#five" class="petal"/>
+      <use href="#five-half" class="petal-2"/>
+      <use href="#five" class="ink" stroke-width="5"/>
+      <circle class="center" r="22"/>
+      <circle class="dot" cx="-7" cy="-4" r="3.2"/><circle class="dot" cx="7" cy="-4" r="3.2"/>
+      <path class="ink" stroke-width="3.5" d="M-6,6 Q0,11 6,6"/>
+    </g>
+    <g id="sticker-petal">
+      <use href="#petal" class="shadow" transform="translate(4,8)"/>
+      <use href="#petal" class="cut"/>
+      <use href="#petal" class="ink" stroke-width="9"/>
+      <use href="#petal" class="petal"/>
+      <use href="#petal-half" class="petal-2"/>
+    </g>
+  </defs>
+
+  <rect class="bg" width="512" height="512"/>
+  <!-- узор фона: мелкие лепестки -->
+  <g class="bg-dot">
+    <use href="#petal" transform="translate(95,120) rotate(-30) scale(.18)"/>
+    <use href="#petal" transform="translate(420,380) rotate(40) scale(.2)"/>
+    <use href="#petal" transform="translate(130,420) rotate(160) scale(.16)"/>
+    <use href="#petal" transform="translate(400,110) rotate(80) scale(.14)"/>
+    <use href="#petal" transform="translate(70,280) rotate(110) scale(.12)"/>
+  </g>
+  <use href="#sticker-blossom" transform="translate(234,274) scale(1.48) rotate(-12)"/>
+  <use href="#sticker-petal" transform="translate(375,172) rotate(62) scale(.55)"/>
+  <use href="#sticker-petal" transform="translate(408,262) rotate(128) scale(.38)"/>
+</svg>

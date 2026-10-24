@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400">
+  <!-- Баннер профиля организации на GitHub. Шрифты: Lora (латиница), Noto Serif CJK JP (花吹雪). -->
+  <defs>
+    <!-- ПАЛИТРА: меняй цвета здесь -->
+    <style>
+      .bg       { fill: #1B1530; }   /* ночное небо */
+      .heart    { fill: #8E2A5B; }   /* сердцевина цветка */
+      .anther   { fill: #FFCF6B; }   /* пыльники (золотые точки) */
+      .filament { stroke: #FFD9E6; stroke-width: 3; stroke-linecap: round; }
+      .vein     { stroke: #FFE9F1; stroke-width: 2.2; stroke-linecap: round; opacity: .55; fill: none; }
+      .wind     { fill: none; stroke: #F7A1C0; stroke-linecap: round; opacity: .45; }
+    </style>
+    <!-- градиент лепестка: от основания (тёмный) к кончику (светлый) -->
+    <linearGradient id="petalGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="-100">
+      <stop offset="0"    stop-color="#E4628F"/>
+      <stop offset="0.45" stop-color="#F7A1C0"/>
+      <stop offset="1"    stop-color="#FFE1EC"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#F7A1C0" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#F7A1C0" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- ОДИН ЛЕПЕСТОК: основание в (0,0), кончик с выемкой вверху на y≈-100.
+         Поменяешь форму здесь — поменяется во всех местах. -->
+    <path id="petal" fill="url(#petalGrad)"
+      d="M0,0 C-24,-10 -44,-46 -38,-76 C-35,-93 -20,-104 -9,-99 L0,-86 L9,-99 C20,-104 35,-93 38,-76 C44,-46 24,-10 0,0 Z"/>
+
+    <!-- ЦВЕТОК: 5 лепестков + прожилки + сердцевина + тычинки. Радиус ≈ 100 -->
+    <g id="blossom">
+      <use href="#petal"/>
+      <use href="#petal" transform="rotate(72)"/>
+      <use href="#petal" transform="rotate(144)"/>
+      <use href="#petal" transform="rotate(216)"/>
+      <use href="#petal" transform="rotate(288)"/>
+      <g class="vein">
+        <path d="M0,-18 L0,-70"/><path d="M0,-18 L0,-70" transform="rotate(72)"/>
+        <path d="M0,-18 L0,-70" transform="rotate(144)"/><path d="M0,-18 L0,-70" transform="rotate(216)"/>
+        <path d="M0,-18 L0,-70" transform="rotate(288)"/>
+      </g>
+      <circle class="heart" r="15"/>
+      <g id="stamens">
+        <g transform="rotate(36)"><line class="filament" x1="0" y1="-12" x2="0" y2="-36"/><circle class="anther" cy="-38" r="5"/></g>
+        <g transform="rotate(108)"><line class="filament" x1="0" y1="-12" x2="0" y2="-36"/><circle class="anther" cy="-38" r="5"/></g>
+        <g transform="rotate(180)"><line class="filament" x1="0" y1="-12" x2="0" y2="-36"/><circle class="anther" cy="-38" r="5"/></g>
+        <g transform="rotate(252)"><line class="filament" x1="0" y1="-12" x2="0" y2="-36"/><circle class="anther" cy="-38" r="5"/></g>
+        <g transform="rotate(324)"><line class="filament" x1="0" y1="-12" x2="0" y2="-36"/><circle class="anther" cy="-38" r="5"/></g>
+        <g transform="rotate(0)"><line class="filament" x1="0" y1="-12" x2="0" y2="-28"/><circle class="anther" cy="-30" r="4"/></g>
+        <g transform="rotate(72)"><line class="filament" x1="0" y1="-12" x2="0" y2="-28"/><circle class="anther" cy="-30" r="4"/></g>
+        <g transform="rotate(144)"><line class="filament" x1="0" y1="-12" x2="0" y2="-28"/><circle class="anther" cy="-30" r="4"/></g>
+        <g transform="rotate(216)"><line class="filament" x1="0" y1="-12" x2="0" y2="-28"/><circle class="anther" cy="-30" r="4"/></g>
+        <g transform="rotate(288)"><line class="filament" x1="0" y1="-12" x2="0" y2="-28"/><circle class="anther" cy="-30" r="4"/></g>
+      </g>
+    </g>
+  </defs>
+  <rect class="bg" width="1280" height="400"/>
+  <circle cx="230" cy="250" r="330" fill="url(#glow)"/>
+
+  <!-- ветер через весь баннер -->
+  <linearGradient id="bannerWind" gradientUnits="userSpaceOnUse" x1="300" y1="0" x2="1260" y2="0">
+    <stop offset="0" stop-color="#FFE1EC" stop-opacity="0"/>
+    <stop offset="0.35" stop-color="#FFE1EC" stop-opacity=".45"/>
+    <stop offset="1" stop-color="#FFE1EC" stop-opacity="0"/>
+  </linearGradient>
+  <g fill="none" stroke="url(#bannerWind)" stroke-linecap="round">
+    <path stroke-width="3" d="M330,170 C500,110 720,70 960,62 C1080,58 1180,66 1260,80"/>
+    <path stroke-width="2" d="M360,320 C560,315 820,320 1040,300 C1140,290 1210,292 1265,300"/>
+  </g>
+
+  <!-- цветок у левого края, частично за кадром -->
+  <use href="#blossom" transform="translate(175,275) scale(1.95) rotate(-14)"/>
+
+  <!-- лепестки, летящие через баннер -->
+  <use href="#petal" transform="translate(470,150) rotate(70) scale(.62)"/>
+  <use href="#petal" transform="translate(560,300) rotate(120) scale(.46)"/>
+  <use href="#petal" transform="translate(1080,95) rotate(40) scale(.34)"/>
+  <use href="#petal" transform="translate(1185,330) rotate(150) scale(.3)"/>
+  <use href="#petal" transform="translate(1225,140) rotate(95) scale(.22)"/>
+
+  <!-- вордмарк -->
+  <text x="610" y="214" font-family="Lora" font-size="92" font-weight="600" fill="#FFE9F1" letter-spacing="1">Hanafubuki</text>
+  <text x="614" y="262" font-family="Lora" font-style="italic" font-size="27" fill="#F7A1C0">vanilla+ Minecraft · Java &amp; Bedrock</text>
+
+  <!-- 花吹雪 — вертикально, по-японски -->
+  <g font-family="Noto Serif CJK JP" font-weight="300" font-size="40" fill="#F7A1C0" opacity=".9" text-anchor="middle">
+    <text x="566" y="150">花</text><text x="566" y="196">吹</text><text x="566" y="242">雪</text>
+  </g>
+  <line x1="590" y1="118" x2="590" y2="248" stroke="#F7A1C0" stroke-opacity=".35" stroke-width="1.5"/>
+</svg>

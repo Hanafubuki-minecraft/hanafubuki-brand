@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <!-- Hanafubuki — основной логотип. Фон прозрачный; тёмная версия получается сборкой (build.py) -->
+  <defs>
+    <!-- ПАЛИТРА: меняй цвета здесь -->
+    <style>
+      .bg       { fill: #1B1530; }   /* ночное небо */
+      .heart    { fill: #8E2A5B; }   /* сердцевина цветка */
+      .anther   { fill: #FFCF6B; }   /* пыльники (золотые точки) */
+      .filament { stroke: #FFD9E6; stroke-width: 3; stroke-linecap: round; }
+      .vein     { stroke: #FFE9F1; stroke-width: 2.2; stroke-linecap: round; opacity: .55; fill: none; }
+      .wind     { fill: none; stroke: #F7A1C0; stroke-linecap: round; opacity: .45; }
+    </style>
+    <!-- градиент лепестка: от основания (тёмный) к кончику (светлый) -->
+    <linearGradient id="petalGrad" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="-100">
+      <stop offset="0"    stop-color="#E4628F"/>
+      <stop offset="0.45" stop-color="#F7A1C0"/>
+      <stop offset="1"    stop-color="#FFE1EC"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#F7A1C0" stop-opacity=".28"/>
+      <stop offset="1" stop-color="#F7A1C0" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- ОДИН ЛЕПЕСТОК: основание в (0,0), кончик с выемкой вверху на y≈-100.
+         Поменяешь форму здесь — поменяется во всех местах. -->
+    <path id="petal" fill="url(#petalGrad)"
+      d="M0,0 C-24,-10 -44,-46 -38,-76 C-35,-93 -20,-104 -9,-99 L0,-86 L9,-99 C20,-104 35,-93 38,-76 C44,-46 24,-10 0,0 Z"/>
+
+    <!-- ЦВЕТОК: 5 лепестков + прожилки + сердцевина + тычинки. Радиус ≈ 100 -->
+    <g id="blossom">
+      <use href="#petal"/>
+      <use href="#petal" transform="rotate(72)"/>
+      <use href="#petal" transform="rotate(144)"/>
+      <use href="#petal" transform="rotate(216)"/>
+      <use href="#petal" transform="rotate(288)"/>
+      <g class="vein">
+        <path d="M0,-18 L0,-70"/><path d="M0,-18 L0,-70" transform="rotate(72)"/>
+        <path d="M0,-18 L0,-70" transform="rotate(144)"/><path d="M0,-18 L0,-70" transform="rotate(216)"/>
+        <path d="M0,-18 L0,-70" transform="rotate(288)"/>
+      </g>
+      <circle class="heart" r="15"/>
+      <g id="stamens">
+        <g transform="rotate(36)"><line class="filament" x1="0" y1="-12" x2="0" y2="-36"/><circle class="anther" cy="-38" r="5"/></g>
+        <g transform="rotate(108)"><line class="filament" x1="0" y1="-12" x2="0" y2="-36"/><circle class="anther" cy="-38" r="5"/></g>
+        <g transform="rotate(180)"><line class="filament" x1="0" y1="-12" x2="0" y2="-36"/><circle class="anther" cy="-38" r="5"/></g>
+        <g transform="rotate(252)"><line class="filament" x1="0" y1="-12" x2="0" y2="-36"/><circle class="anther" cy="-38" r="5"/></g>
+        <g transform="rotate(324)"><line class="filament" x1="0" y1="-12" x2="0" y2="-36"/><circle class="anther" cy="-38" r="5"/></g>
+        <g transform="rotate(0)"><line class="filament" x1="0" y1="-12" x2="0" y2="-28"/><circle class="anther" cy="-30" r="4"/></g>
+        <g transform="rotate(72)"><line class="filament" x1="0" y1="-12" x2="0" y2="-28"/><circle class="anther" cy="-30" r="4"/></g>
+        <g transform="rotate(144)"><line class="filament" x1="0" y1="-12" x2="0" y2="-28"/><circle class="anther" cy="-30" r="4"/></g>
+        <g transform="rotate(216)"><line class="filament" x1="0" y1="-12" x2="0" y2="-28"/><circle class="anther" cy="-30" r="4"/></g>
+        <g transform="rotate(288)"><line class="filament" x1="0" y1="-12" x2="0" y2="-28"/><circle class="anther" cy="-30" r="4"/></g>
+      </g>
+    </g>
+  </defs>
+  <!-- ВЕТЕР: тонкие штрихи, которые тают по краям (градиент windFade) -->
+  <linearGradient id="windFade" gradientUnits="userSpaceOnUse" x1="560" y1="0" x2="980" y2="0">
+    <stop offset="0" stop-color="#FFE1EC" stop-opacity="0"/>
+    <stop offset="0.45" stop-color="#FFE1EC" stop-opacity=".55"/>
+    <stop offset="1" stop-color="#FFE1EC" stop-opacity="0"/>
+  </linearGradient>
+  <g fill="none" stroke="url(#windFade)" stroke-linecap="round">
+    <path stroke-width="5" d="M590,430 C700,400 780,330 860,250 C890,220 930,205 965,210"/>
+    <path stroke-width="3.5" d="M640,560 C750,540 840,470 900,420 C925,400 950,395 975,400"/>
+    <path stroke-width="3" d="M610,320 C690,290 760,230 820,170"/>
+  </g>
+  <!-- ЦВЕТОК: translate = позиция, scale = размер (1 ≈ радиус 100px), rotate = поворот -->
+  <use href="#blossom" transform="translate(400,600) scale(3.15) rotate(-12)"/>
+  <!-- СОРВАННЫЕ ЛЕПЕСТКИ: уменьшаются по мере удаления от цветка -->
+  <use href="#petal" transform="translate(745,330) rotate(72) scale(1.1)"/>
+  <use href="#petal" transform="translate(840,500) rotate(128) scale(0.8)"/>
+  <use href="#petal" transform="translate(885,255) rotate(38) scale(0.66)"/>
+  <use href="#petal" transform="translate(930,400) rotate(160) scale(0.45)"/>
+  <use href="#petal" transform="translate(925,140) rotate(98) scale(0.36)"/>
+</svg>
