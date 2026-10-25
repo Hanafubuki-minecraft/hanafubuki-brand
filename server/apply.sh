@@ -71,6 +71,25 @@ say "Тексты плагинов Hanafubuki сброшены — создад�
 AM="$P/AuthMe/messages/messages_ru.yml"
 if [ -f "$P/AuthMe/config.yml" ]; then
   sed -i 's/^\(\s*messagesLanguage:\).*/\1 ru/' "$P/AuthMe/config.yml"
+  python3 - "$P/AuthMe/config.yml" << 'PY'
+import re, sys
+path = sys.argv[1]
+lines = open(path, encoding="utf-8").read().split("\n")
+stack = []
+for i, line in enumerate(lines):
+    m = re.match(r"^(\s*)([A-Za-z0-9_\-]+):\s*(.*)$", line)
+    if not m:
+        continue
+    indent, key, val = len(m.group(1)), m.group(2), m.group(3).strip()
+    while stack and stack[-1][0] >= indent:
+        stack.pop()
+    full = ".".join([k for _, k in stack] + [key])
+    if val == "":
+        stack.append((indent, key)); continue
+    if full == "settings.registration.messageInterval":
+        lines[i] = " " * indent + "messageInterval: 30"
+open(path, "w", encoding="utf-8").write("\n".join(lines))
+PY
 fi
 if [ -f "$AM" ]; then
   python3 - "$AM" << 'PY'
@@ -90,13 +109,14 @@ for line in lines:
     if section == "login" and s.startswith("success:"):
         line = setv("&d❀ &fДобро пожаловать на &dHanafubuki&f!")
     elif section == "registration" and s.startswith("success:"):
-        line = setv("&d❀ &fГотово — добро пожаловать на &dHanafubuki&f!")
+        line = setv("")  # после регистрации AuthMe сразу входит — приветствие придёт одно, от входа
     elif section == "session" and s.startswith("valid_session:"):
         line = setv("")
     elif s.startswith("success:") and "Bedrock" in s:
         line = setv("&d❀ &fДобро пожаловать на &dHanafubuki&f!")
     out.append(line)
-text = "\n".join(out).replace("&2", "&a")
+# цвета сервера: тёмно-зелёный → зелёный, бирюзовые подсказки → приглушённый серый, голубой → белый
+text = "\n".join(out).replace("&2", "&a").replace("&3", "&7").replace("&b", "&f")
 open(path, "w", encoding="utf-8").write(text)
 PY
   say "AuthMe: приветствия в стиле сервера, одно сообщение при входе"
