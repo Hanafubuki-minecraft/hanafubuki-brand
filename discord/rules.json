@@ -1,0 +1,23 @@
+{
+  "messages": [
+    {
+      "data": {
+        "content": null,
+        "username": "Hanafubuki",
+        "avatar_url": "https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/export/discord/hanafubuki-discord-icon-512.png",
+        "embeds": [
+          {
+            "color": 16228800,
+            "title": "❀ Правила",
+            "description": "**1.** Не ломай, не бери и не перестраивай чужое без разрешения хозяина.\n**2.** Без читов, X-ray, дюпов и эксплойтов. Нашёл баг — напиши админу.\n**3.** Уважай других: без оскорблений, травли и спама.\n**4.** Не строй фермы и механизмы, от которых лагает сервер. Сомневаешься — спроси.\n**5.** Копай в мире ресурсов, а основной мир пусть остаётся красивым.",
+            "footer": {
+              "text": "Все действия записываются, а гриф откатывается.",
+              "icon_url": "https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/export/discord/hanafubuki-discord-icon-512.png"
+            }
+          }
+        ],
+        "attachments": []
+      }
+    }
+  ]
+}
