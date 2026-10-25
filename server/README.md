@@ -6,9 +6,9 @@
 curl -fsSL https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/server/apply.sh | bash
 ```
 
-Сервер должен быть остановлен. Скрипт:
+Сервер должен быть остановлен — или запусти с `FORCE=1`, тогда меняются только файлы, а применится всё при следующем рестарте. Скрипт:
 
-- делает бэкап затронутых файлов в `~/hanafubuki-backup-<дата>.tar.gz`;
+- делает бэкап затронутых файлов в `~/hanafubuki-backup-<дата>.tar.gz` и хранит только 2 последних (`KEEP_BACKUPS=N`, чтобы изменить);
 - ставит последние релизы `hanafubuki-core-plugin`, `hanafubuki-bluemap-markers`, `hanafubuki-resource-world`;
 - пересоздаёт их тексты в стиле [`STYLE.md`](../STYLE.md) на русском;
 - оформляет сообщения AuthMe о входе и оставляет одно приветствие;

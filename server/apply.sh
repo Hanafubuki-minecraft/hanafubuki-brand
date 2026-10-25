@@ -3,7 +3,8 @@
 #
 #   curl -fsSL https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/server/apply.sh | bash
 #
-# Сервер должен быть ОСТАНОВЛЕН. Перед изменениями делается бэкап в ~/hanafubuki-backup-<дата>.tar.gz
+# Сервер должен быть ОСТАНОВЛЕН (или FORCE=1 — только файлы, применится при следующем рестарте).
+# Перед изменениями делается бэкап в ~/hanafubuki-backup-<дата>.tar.gz, хранятся 2 последних (KEEP_BACKUPS=N).
 # Другой путь к серверу:  ... | SERVER=/путь/к/серверу bash
 set -euo pipefail
 
@@ -30,6 +31,8 @@ tar czf "$BACKUP" -C "$SERVER" --ignore-failed-read \
   plugins/AuthMe/config.yml plugins/AuthMe/messages plugins/Geyser-Spigot/config.yml \
   plugins/PlaceholderAPI/config.yml 2>/dev/null || true
 say "Бэкап: $BACKUP"
+# храним только последние ${KEEP_BACKUPS:-2} бэкапа
+ls -1t "$HOME"/hanafubuki-backup-*.tar.gz 2>/dev/null | tail -n +$(( ${KEEP_BACKUPS:-2} + 1 )) | xargs -r rm -f
 
 # ---------- плагины: последние релизы ----------
 latest_tag() {  # без GitHub API (у него лимит запросов): берём тег из редиректа /releases/latest
