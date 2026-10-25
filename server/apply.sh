@@ -64,6 +64,44 @@ for f in "$P/Hanafubuki/config.yml" "$P/HanafubukiBlueMapMarkers/config.yml" "$P
   [ -f "$f" ] && sed -i 's/"#A99BB5"/"#C9BED3"/; s/"#6F6480"/"#9488A6"/' "$f"
 done
 
+# ---------- датапак hanafubuki-tweaks (приветствие BACAP в стиле сервера) ----------
+TMPD=$(mktemp -d)
+if curl -fsSL -o "$TMPD/brand.tar.gz" "https://codeload.github.com/$ORG/hanafubuki-brand/tar.gz/refs/heads/main" \
+   && tar xzf "$TMPD/brand.tar.gz" -C "$TMPD" && [ -d "$TMPD/hanafubuki-brand-main/server/datapacks/hanafubuki-tweaks" ]; then
+  rm -rf "$SERVER/world/datapacks/hanafubuki-tweaks"
+  cp -r "$TMPD/hanafubuki-brand-main/server/datapacks/hanafubuki-tweaks" "$SERVER/world/datapacks/"
+  say "Датапак hanafubuki-tweaks: приветствие BACAP в стиле сервера"
+fi
+rm -rf "$TMPD"
+
+# ---------- Anti-Xray (Paper): руды прячутся, X-ray видит кашу ----------
+PWD_CFG="$SERVER/config/paper-world-defaults.yml"
+if [ -f "$PWD_CFG" ]; then
+  python3 - "$PWD_CFG" << 'PY'
+import re, sys
+path = sys.argv[1]
+lines = open(path, encoding="utf-8").read().split("\n")
+stack = []
+want = {"anticheat.anti-xray.enabled": "true", "anticheat.anti-xray.engine-mode": "2"}
+done = set()
+for i, line in enumerate(lines):
+    m = re.match(r"^(\s*)([A-Za-z0-9_\-]+):\s*(.*)$", line)
+    if not m:
+        continue
+    indent, key, val = len(m.group(1)), m.group(2), m.group(3).strip()
+    while stack and stack[-1][0] >= indent:
+        stack.pop()
+    full = ".".join([k for _, k in stack] + [key])
+    if val == "":
+        stack.append((indent, key)); continue
+    if full in want:
+        lines[i] = " " * indent + key + ": " + want[full]; done.add(full)
+open(path, "w", encoding="utf-8").write("\n".join(lines))
+print("ok" if len(done) == len(want) else "missing: " + ", ".join(set(want) - done))
+PY
+  say "Anti-Xray включён (engine-mode 2)"
+fi
+
 # ---------- тексты своих плагинов: пересоздать в новом стиле, язык ru ----------
 rm -f  "$P/Hanafubuki/messages.yml"
 rm -rf "$P/HanafubukiBlueMapMarkers/lang" "$P/HanafubukiResourceWorld/lang"

@@ -1,0 +1,2 @@
+# Hanafubuki: вместо большого английского приветствия BACAP — одна тихая строка в стиле сервера
+tellraw @s ["",{"text":"❀ ","color":"#F7A1C0"},{"text":"На сервере 1000+ достижений: меню ","color":"#C9BED3"},{"keybind":"key.advancements","color":"#F4EEF6"},{"text":" (Bedrock — ","color":"#C9BED3"},{"text":"/geyser advancements","color":"#F4EEF6"},{"text":"). ","color":"#C9BED3"},{"text":"BlazeandCave's Advancements Pack · Cavinator1","color":"#9488A6"}]
