@@ -53,6 +53,20 @@ install_plugin() {  # $1 repo, $2 имя ассета ({v} = версия без
 install_plugin hanafubuki-core-plugin      "untitled-1.0-SNAPSHOT.jar"          "hanafubuki-core-plugin.jar"   "hanafubuki-core-plugin*.jar"
 install_plugin hanafubuki-bluemap-markers  "HanafubukiBlueMapMarkers-{v}.jar"   "HanafubukiBlueMapMarkers.jar" "HanafubukiBlueMapMarkers*.jar"
 install_plugin hanafubuki-resource-world   "HanafubukiResourceWorld-{v}.jar"    "HanafubukiResourceWorld.jar"  "HanafubukiResourceWorld*.jar"
+install_plugin hanafubuki-discord-msg-sync "HanafubukiDiscordSync-{v}.jar"      "HanafubukiDiscordSync.jar"    "HanafubukiDiscordSync*.jar"
+
+# старый мост (DiscordMsgSync с токеном внутри jar) убираем, только когда у нового указан токен —
+# иначе чат в Discord пропал бы
+DS_CFG="$P/HanafubukiDiscordSync/config.yml"
+if ls "$P"/discord-msg-sync*.jar >/dev/null 2>&1; then
+  if [ -f "$DS_CFG" ] && grep -Eq '^\s*token:\s*"[^"]+"' "$DS_CFG"; then
+    rm -f "$P"/discord-msg-sync*.jar
+    say "Старый DiscordMsgSync убран — работает HanafubukiDiscordSync"
+  else
+    warn "Новый мост поставлен, но токен ещё не задан: впиши discord.token и discord.channel-id в"
+    warn "  $DS_CFG (появится после запуска сервера), затем прогони скрипт снова — он уберёт старый мост"
+  fi
+fi
 
 # ---------- Vanilla Tweaks: конфетти-криперы заменены сакура-криперами из core ----------
 for d in "$SERVER"/world/datapacks/confetti\ creepers*.zip; do
