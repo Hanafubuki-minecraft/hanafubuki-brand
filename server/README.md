@@ -12,6 +12,7 @@ curl -fsSL https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-bra
 - ставит последние релизы `hanafubuki-core-plugin`, `hanafubuki-bluemap-markers`, `hanafubuki-resource-world`;
 - пересоздаёт их тексты в стиле [`STYLE.md`](../STYLE.md) на русском;
 - оформляет сообщения AuthMe о входе и оставляет одно приветствие;
+- убирает датапак Vanilla Tweaks «Confetti Creepers» — его заменяют сакура-криперы из core;
 - отключает уведомления PlaceholderAPI об обновлениях;
 - ставит имя сервера в Geyser, описание (MOTD) и иконку из [`export/minecraft/server-icon.png`](../export/minecraft/server-icon.png).
 

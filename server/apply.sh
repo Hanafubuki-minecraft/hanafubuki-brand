@@ -51,6 +51,11 @@ install_plugin hanafubuki-core-plugin      "untitled-1.0-SNAPSHOT.jar"          
 install_plugin hanafubuki-bluemap-markers  "HanafubukiBlueMapMarkers-{v}.jar"   "HanafubukiBlueMapMarkers.jar" "HanafubukiBlueMapMarkers*.jar"
 install_plugin hanafubuki-resource-world   "HanafubukiResourceWorld-{v}.jar"    "HanafubukiResourceWorld.jar"  "HanafubukiResourceWorld*.jar"
 
+# ---------- Vanilla Tweaks: конфетти-криперы заменены сакура-криперами из core ----------
+for d in "$SERVER"/world/datapacks/confetti\ creepers*.zip; do
+  [ -e "$d" ] && rm -f "$d" && say "Убран датапак: $(basename "$d") — вместо конфетти теперь сакура (core → sakura-creepers)"
+done
+
 # ---------- тексты своих плагинов: пересоздать в новом стиле, язык ru ----------
 rm -f  "$P/Hanafubuki/messages.yml"
 rm -rf "$P/HanafubukiBlueMapMarkers/lang" "$P/HanafubukiResourceWorld/lang"
