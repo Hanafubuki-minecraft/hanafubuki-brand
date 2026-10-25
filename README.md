@@ -40,3 +40,17 @@ python3 build.py
 ```
 
 Все PNG в `export/` пересоберутся из исходников.
+
+## Стиль текстов
+
+Как сервер пишет игрокам — голос, палитра чата, символы и шаблоны сообщений: [`STYLE.md`](STYLE.md).
+
+## Применить на сервере
+
+Оформление и последние версии плагинов ставятся одной командой (сервер остановлен):
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/server/apply.sh | bash
+```
+
+Подробнее — [`server/README.md`](server/README.md).

@@ -1,0 +1,130 @@
+#!/usr/bin/env bash
+# Hanafubuki — применить оформление и последние версии своих плагинов на сервере одной командой.
+#
+#   curl -fsSL https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/server/apply.sh | bash
+#
+# Сервер должен быть ОСТАНОВЛЕН. Перед изменениями делается бэкап в ~/hanafubuki-backup-<дата>.tar.gz
+# Другой путь к серверу:  ... | SERVER=/путь/к/серверу bash
+set -euo pipefail
+
+SERVER="${SERVER:-$HOME/crafty-4/servers/48251565-7035-40e5-91b3-37a7fb4e83d9}"
+P="$SERVER/plugins"
+ORG="Hanafubuki-minecraft"
+RAW="https://raw.githubusercontent.com/$ORG/hanafubuki-brand/main"
+
+say()  { printf '\033[38;5;218m❀\033[0m %s\n' "$*"; }
+warn() { printf '\033[38;5;210m!\033[0m %s\n' "$*"; }
+
+[ -d "$P" ] || { warn "Не найдена папка плагинов: $P (укажи SERVER=...)"; exit 1; }
+
+if pgrep -f "paper.*\.jar" >/dev/null 2>&1 && [ "${FORCE:-0}" != "1" ]; then
+  warn "Похоже, сервер запущен. Останови его в Crafty и запусти скрипт снова (или FORCE=1, если уверен)."
+  exit 1
+fi
+
+# ---------- бэкап ----------
+BACKUP="$HOME/hanafubuki-backup-$(date +%F-%H%M%S).tar.gz"
+tar czf "$BACKUP" -C "$SERVER" --ignore-failed-read \
+  server.properties server-icon.png \
+  plugins/Hanafubuki plugins/HanafubukiBlueMapMarkers plugins/HanafubukiResourceWorld \
+  plugins/AuthMe/config.yml plugins/AuthMe/messages plugins/Geyser-Spigot/config.yml \
+  plugins/PlaceholderAPI/config.yml 2>/dev/null || true
+say "Бэкап: $BACKUP"
+
+# ---------- плагины: последние релизы ----------
+latest_tag() {  # без GitHub API (у него лимит запросов): берём тег из редиректа /releases/latest
+  curl -fsSLI -o /dev/null -w '%{url_effective}' "https://github.com/$ORG/$1/releases/latest" | sed 's#.*/tag/##'
+}
+
+install_plugin() {  # $1 repo, $2 имя ассета ({v} = версия без «v»), $3 итоговое имя jar, $4 шаблон старых jar
+  local tag ver asset
+  tag=$(latest_tag "$1") || true
+  [ -n "${tag:-}" ] || { warn "Не нашёл релиз $1"; return; }
+  ver="${tag#v}"
+  asset="${2//\{v\}/$ver}"
+  rm -f "$P"/$4
+  curl -fsSL -o "$P/$3" "https://github.com/$ORG/$1/releases/download/$tag/$asset"
+  say "$1 $tag → plugins/$3"
+}
+
+install_plugin hanafubuki-core-plugin      "untitled-1.0-SNAPSHOT.jar"          "hanafubuki-core-plugin.jar"   "hanafubuki-core-plugin*.jar"
+install_plugin hanafubuki-bluemap-markers  "HanafubukiBlueMapMarkers-{v}.jar"   "HanafubukiBlueMapMarkers.jar" "HanafubukiBlueMapMarkers*.jar"
+install_plugin hanafubuki-resource-world   "HanafubukiResourceWorld-{v}.jar"    "HanafubukiResourceWorld.jar"  "HanafubukiResourceWorld*.jar"
+
+# ---------- тексты своих плагинов: пересоздать в новом стиле, язык ru ----------
+rm -f  "$P/Hanafubuki/messages.yml"
+rm -rf "$P/HanafubukiBlueMapMarkers/lang" "$P/HanafubukiResourceWorld/lang"
+for f in "$P/HanafubukiBlueMapMarkers/config.yml" "$P/HanafubukiResourceWorld/config.yml"; do
+  [ -f "$f" ] && sed -i 's/^language: .*/language: ru/' "$f"
+done
+say "Тексты плагинов Hanafubuki сброшены — создадутся заново в новом стиле (русский)"
+
+# ---------- AuthMe ----------
+AM="$P/AuthMe/messages/messages_ru.yml"
+if [ -f "$P/AuthMe/config.yml" ]; then
+  sed -i 's/^\(\s*messagesLanguage:\).*/\1 ru/' "$P/AuthMe/config.yml"
+fi
+if [ -f "$AM" ]; then
+  python3 - "$AM" << 'PY'
+import re, sys
+path = sys.argv[1]
+lines = open(path, encoding="utf-8").read().split("\n")
+section = None
+out = []
+for line in lines:
+    m = re.match(r"^([A-Za-z0-9_]+):\s*$", line)
+    if m:
+        section = m.group(1)
+    def setv(value):
+        key = line.split(":", 1)[0]
+        return f"{key}: '{value}'"
+    s = line.strip()
+    if section == "login" and s.startswith("success:"):
+        line = setv("&d❀ &fДобро пожаловать на &dHanafubuki&f!")
+    elif section == "registration" and s.startswith("success:"):
+        line = setv("&d❀ &fГотово — добро пожаловать на &dHanafubuki&f!")
+    elif section == "session" and s.startswith("valid_session:"):
+        line = setv("")
+    elif s.startswith("success:") and "Bedrock" in s:
+        line = setv("&d❀ &fДобро пожаловать на &dHanafubuki&f!")
+    out.append(line)
+text = "\n".join(out).replace("&2", "&a")
+open(path, "w", encoding="utf-8").write(text)
+PY
+  say "AuthMe: приветствия в стиле сервера, одно сообщение при входе"
+else
+  warn "AuthMe: $AM ещё не создан — запусти сервер один раз и прогони скрипт снова"
+fi
+
+# ---------- PlaceholderAPI: без уведомлений об обновлениях ----------
+[ -f "$P/PlaceholderAPI/config.yml" ] && sed -i 's/^check_updates: true/check_updates: false/' "$P/PlaceholderAPI/config.yml"
+
+# ---------- Geyser: имя сервера ----------
+if [ -f "$P/Geyser-Spigot/config.yml" ]; then
+  sed -i 's/^\(\s*server-name:\).*/\1 Hanafubuki/' "$P/Geyser-Spigot/config.yml"
+  say "Geyser: имя сервера Hanafubuki"
+fi
+
+# ---------- описание (MOTD) и иконка ----------
+python3 - "$SERVER/server.properties" << 'PY'
+import sys
+path = sys.argv[1]
+# Две строки описания в списке серверов (Java; Bedrock получает его через Geyser)
+motd = ("§d❀ §fHanafubuki §8· §7vanilla+\n"
+        "§7Java §8& §7Bedrock §8· §dсакура, уют и долгая игра")
+esc = "".join(c if 32 <= ord(c) < 127 else ("\\n" if c == "\n" else f"\\u{ord(c):04X}") for c in motd)
+lines = open(path, encoding="latin-1").read().split("\n")
+done = False
+for i, l in enumerate(lines):
+    if l.startswith("motd="):
+        lines[i] = "motd=" + esc; done = True
+if not done:
+    lines.append("motd=" + esc)
+open(path, "w", encoding="latin-1").write("\n".join(lines))
+PY
+curl -fsSL -o "$SERVER/server-icon.png" "$RAW/export/minecraft/server-icon.png"
+say "Описание сервера и иконка обновлены"
+
+echo
+say "Готово. Запускай сервер в Crafty."
+say "Если что-то пошло не так — откат: tar xzf $BACKUP -C \"$SERVER\""
