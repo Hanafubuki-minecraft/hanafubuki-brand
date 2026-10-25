@@ -1,55 +1,49 @@
 {
-  "messages": [
+  "content": null,
+  "username": "Hanafubuki",
+  "avatar_url": "https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/export/discord/hanafubuki-discord-icon-512.png",
+  "embeds": [
     {
-      "data": {
-        "content": null,
-        "username": "Hanafubuki",
-        "avatar_url": "https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/export/discord/hanafubuki-discord-icon-512.png",
-        "embeds": [
-          {
-            "color": 16228800,
-            "image": {
-              "url": "https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/export/github/hanafubuki-banner.png"
-            }
-          },
-          {
-            "color": 16228800,
-            "title": "❀ Hanafubuki",
-            "description": "**花吹雪** — «метель из лепестков сакуры».\nУютный vanilla+ сервер: всё как в обычном Майнкрафте, только удобнее и комфортнее.",
-            "fields": [
-              {
-                "name": "Как зайти",
-                "value": "**Java** — `91.214.31.132`\n**Bedrock** — `91.214.31.132`, порт `19132`",
-                "inline": false
-              },
-              {
-                "name": "Доступ",
-                "value": "Вход по вайтлисту — проходку можно получить здесь, в Discord.",
-                "inline": false
-              },
-              {
-                "name": "Ссылки",
-                "value": "🗺️ [Карта мира](http://91.214.31.132:8123)",
-                "inline": false
-              },
-              {
-                "name": "Что есть на сервере",
-                "value": "Мир ресурсов · портал на спавне · карта с метками игроков · `/sit` и `/lay` · 1000+ достижений BACAP · Vanilla Tweaks · множество приятных мелочей",
-                "inline": false
-              }
-            ]
-          },
-          {
-            "color": 9734310,
-            "title": "Основные команды",
-            "description": "`/spawn` — на спавн\n`/home` — к своей кровати\n`/tpa [ник]` · `/tpaaccept` — попроситься к игроку · принять\n`/resources` — в мир ресурсов\n`/marker add [название]` — метка на карте\n`/msg [ник]` · `/r` — личные сообщения\n`/guide` — книга новичка\n`/help` — все доступные команды",
-            "footer": {
-              "text": "Достижения — BlazeandCave's Advancements Pack (Cavinator1)"
-            }
-          }
-        ],
-        "attachments": []
+      "color": 16228800,
+      "image": {
+        "url": "https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/export/github/hanafubuki-banner.png"
+      }
+    },
+    {
+      "color": 16228800,
+      "title": "❀ Hanafubuki",
+      "description": "**花吹雪** — «метель из лепестков сакуры».\nУютный vanilla+ сервер: всё как в обычном Майнкрафте, только удобнее и комфортнее.",
+      "fields": [
+        {
+          "name": "Как зайти",
+          "value": "**Java** — `91.214.31.132`\n**Bedrock** — `91.214.31.132`, порт `19132`",
+          "inline": false
+        },
+        {
+          "name": "Доступ",
+          "value": "Вход по вайтлисту — проходку можно получить здесь, в Discord.",
+          "inline": false
+        },
+        {
+          "name": "Ссылки",
+          "value": "🗺️ [Карта мира](http://91.214.31.132:8123)",
+          "inline": false
+        },
+        {
+          "name": "Что есть на сервере",
+          "value": "Мир ресурсов · портал на спавне · карта с метками игроков · `/sit` и `/lay` · 1000+ достижений BACAP · Vanilla Tweaks · множество приятных мелочей",
+          "inline": false
+        }
+      ]
+    },
+    {
+      "color": 9734310,
+      "title": "Основные команды",
+      "description": "`/spawn` — на спавн\n`/home` — к своей кровати\n`/tpa [ник]` · `/tpaaccept` — попроситься к игроку · принять\n`/resources` — в мир ресурсов\n`/marker add [название]` — метка на карте\n`/msg [ник]` · `/r` — личные сообщения\n`/guide` — книга новичка\n`/help` — все доступные команды",
+      "footer": {
+        "text": "Достижения — BlazeandCave's Advancements Pack (Cavinator1)"
       }
     }
-  ]
+  ],
+  "attachments": []
 }
