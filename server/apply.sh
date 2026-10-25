@@ -59,6 +59,11 @@ for d in "$SERVER"/world/datapacks/confetti\ creepers*.zip; do
   [ -e "$d" ] && rm -f "$d" && say "Убран датапак: $(basename "$d") — вместо конфетти теперь сакура (core → sakura-creepers)"
 done
 
+# ---------- палитра: светлее приглушённый и тихий текст (старые значения по умолчанию → новые) ----------
+for f in "$P/Hanafubuki/config.yml" "$P/HanafubukiBlueMapMarkers/config.yml" "$P/HanafubukiResourceWorld/config.yml"; do
+  [ -f "$f" ] && sed -i 's/"#A99BB5"/"#C9BED3"/; s/"#6F6480"/"#9488A6"/' "$f"
+done
+
 # ---------- тексты своих плагинов: пересоздать в новом стиле, язык ru ----------
 rm -f  "$P/Hanafubuki/messages.yml"
 rm -rf "$P/HanafubukiBlueMapMarkers/lang" "$P/HanafubukiResourceWorld/lang"

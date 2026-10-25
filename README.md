@@ -54,3 +54,7 @@ curl -fsSL https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-bra
 ```
 
 Подробнее — [`server/README.md`](server/README.md).
+
+## Информация о сервере
+
+Описание, как зайти, ссылки, правила и команды — [`INFO.md`](INFO.md). Отсюда берутся книга новичка и сообщения в Discord.
