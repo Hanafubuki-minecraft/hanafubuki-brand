@@ -13,7 +13,7 @@ curl -fsSL https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-bra
 - пересоздаёт их тексты в стиле [`STYLE.md`](../STYLE.md) на русском;
 - оформляет сообщения AuthMe о входе и оставляет одно приветствие;
 - убирает датапак Vanilla Tweaks «Confetti Creepers» — его заменяют сакура-криперы из core;
-- ставит датапак `hanafubuki-tweaks` — приветствие BACAP одной тихой строкой в стиле сервера;
+- ставит последний релиз датапака [`hanafubuki-tweaks`](https://github.com/Hanafubuki-minecraft/hanafubuki-tweaks) (приветствие BACAP одной тихой строкой в стиле сервера);
 - включает Anti-Xray в Paper (`engine-mode: 2`);
 - отключает уведомления PlaceholderAPI об обновлениях;
 - ставит имя сервера в Geyser, описание (MOTD) и иконку из [`export/minecraft/server-icon.png`](../export/minecraft/server-icon.png).

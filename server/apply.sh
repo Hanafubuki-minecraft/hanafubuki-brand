@@ -64,15 +64,14 @@ for f in "$P/Hanafubuki/config.yml" "$P/HanafubukiBlueMapMarkers/config.yml" "$P
   [ -f "$f" ] && sed -i 's/"#A99BB5"/"#C9BED3"/; s/"#6F6480"/"#9488A6"/' "$f"
 done
 
-# ---------- датапак hanafubuki-tweaks (приветствие BACAP в стиле сервера) ----------
-TMPD=$(mktemp -d)
-if curl -fsSL -o "$TMPD/brand.tar.gz" "https://codeload.github.com/$ORG/hanafubuki-brand/tar.gz/refs/heads/main" \
-   && tar xzf "$TMPD/brand.tar.gz" -C "$TMPD" && [ -d "$TMPD/hanafubuki-brand-main/server/datapacks/hanafubuki-tweaks" ]; then
-  rm -rf "$SERVER/world/datapacks/hanafubuki-tweaks"
-  cp -r "$TMPD/hanafubuki-brand-main/server/datapacks/hanafubuki-tweaks" "$SERVER/world/datapacks/"
-  say "Датапак hanafubuki-tweaks: приветствие BACAP в стиле сервера"
+# ---------- датапак hanafubuki-tweaks (репо Hanafubuki-minecraft/hanafubuki-tweaks) ----------
+TW_TAG=$(latest_tag hanafubuki-tweaks) || true
+if [ -n "${TW_TAG:-}" ]; then
+  rm -rf "$SERVER/world/datapacks/hanafubuki-tweaks" "$SERVER"/world/datapacks/hanafubuki-tweaks*.zip
+  curl -fsSL -o "$SERVER/world/datapacks/hanafubuki-tweaks.zip" \
+    "https://github.com/$ORG/hanafubuki-tweaks/releases/download/$TW_TAG/hanafubuki-tweaks-${TW_TAG#v}.zip"
+  say "hanafubuki-tweaks $TW_TAG → world/datapacks/hanafubuki-tweaks.zip"
 fi
-rm -rf "$TMPD"
 
 # ---------- Anti-Xray (Paper): руды прячутся, X-ray видит кашу ----------
 PWD_CFG="$SERVER/config/paper-world-defaults.yml"
