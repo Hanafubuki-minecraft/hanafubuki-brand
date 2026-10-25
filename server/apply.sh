@@ -59,7 +59,7 @@ install_plugin hanafubuki-discord-msg-sync "HanafubukiDiscordSync-{v}.jar"      
 # иначе чат в Discord пропал бы
 DS_CFG="$P/HanafubukiDiscordSync/config.yml"
 if ls "$P"/discord-msg-sync*.jar >/dev/null 2>&1; then
-  if [ -f "$DS_CFG" ] && grep -Eq '^\s*token:\s*"[^"]+"' "$DS_CFG"; then
+  if [ -f "$DS_CFG" ] && grep -Eq "^\s*token:\s*['\"]?[A-Za-z0-9_.-]{20,}" "$DS_CFG"; then
     rm -f "$P"/discord-msg-sync*.jar
     say "Старый DiscordMsgSync убран — работает HanafubukiDiscordSync"
   else
