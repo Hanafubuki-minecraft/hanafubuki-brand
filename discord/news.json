@@ -1,0 +1,28 @@
+{
+  "content": null,
+  "username": "Hanafubuki",
+  "avatar_url": "https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/export/discord/hanafubuki-discord-icon-512.png",
+  "attachments": [],
+  "embeds": [
+    {
+      "color": 16228800,
+      "title": "❀ Новости",
+      "description": "Здесь — всё, что происходит на сервере. Коротко и по делу, без спама.",
+      "fields": [
+        {
+          "name": "Что сюда попадает",
+          "value": "🌸 **Обновления** — новые возможности и приятные мелочи\n🎐 **События** — сезонные праздники и общие ивенты\n⛏️ **Мир ресурсов** — напоминания перед обновлением\n🛠️ **Техработы** — плановые перезапуски и обслуживание\n📌 **Важное** — изменения правил и всё, что стоит знать",
+          "inline": false
+        }
+      ]
+    },
+    {
+      "color": 9734310,
+      "description": "Включи уведомления канала, чтобы ничего не пропустить.",
+      "footer": {
+        "text": "Hanafubuki · 花吹雪",
+        "icon_url": "https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/export/discord/hanafubuki-discord-icon-512.png"
+      }
+    }
+  ]
+}
