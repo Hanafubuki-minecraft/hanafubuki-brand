@@ -1,0 +1,33 @@
+{
+  "content": null,
+  "username": "Hanafubuki",
+  "avatar_url": "https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/export/discord/hanafubuki-discord-icon-512.png",
+  "attachments": [],
+  "embeds": [
+    {
+      "color": 16228800,
+      "title": "❀ Заявка на проходку",
+      "description": "Вход на сервер — по **платной проходке**.\nЗаполни анкету ниже и отправь её сообщением в этот канал. После одобрения напишем, как оплатить, добавим в вайтлист и выдадим роль **Игрок**.",
+      "fields": [
+        {
+          "name": "Анкета",
+          "value": "```\nНик в Minecraft:\nПлатформа (Java / Bedrock):\nВозраст:\nОткуда о нас знаешь:\nЧем любишь заниматься в игре:\nПравила прочитаны (да / нет):\n```",
+          "inline": false
+        },
+        {
+          "name": "Как всё проходит",
+          "value": "**1.** Заявка → **2.** одобрение → **3.** оплата → **4.** вайтлист и роль **Игрок** — и можно заходить.",
+          "inline": false
+        }
+      ]
+    },
+    {
+      "color": 9734310,
+      "description": "Перед заявкой загляни в правила — так будет проще всем.",
+      "footer": {
+        "text": "Hanafubuki · 花吹雪",
+        "icon_url": "https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/export/discord/hanafubuki-discord-icon-512.png"
+      }
+    }
+  ]
+}
