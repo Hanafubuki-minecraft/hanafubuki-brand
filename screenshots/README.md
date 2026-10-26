@@ -6,32 +6,32 @@
 ![Спавн: портал в Незер и вишнёвая арка в мир ресурсов](web/01-spawn-portals.webp)
 `https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/screenshots/web/01-spawn-portals.webp`
 
-### Вид со спавна на дом-склад
-![Вид со спавна на дом-склад](web/02-spawn-view.webp)
+### Вид со спавна на мост
+![Вид со спавна на мост](web/02-spawn-view.webp)
 `https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/screenshots/web/02-spawn-view.webp`
 
-### Дом-склад у спавна
-![Дом-склад у спавна](web/03-storage-house.webp)
+### Мост на спавне
+![Мост на спавне](web/03-storage-house.webp)
 `https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/screenshots/web/03-storage-house.webp`
 
-### Деревянный дом
-![Деревянный дом](web/04-wooden-house.webp)
+### Мой деревянный дом
+![Мой деревянный дом](web/04-wooden-house.webp)
 `https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/screenshots/web/04-wooden-house.webp`
 
-### Склад: длинный зал сундуков
-![Склад: длинный зал сундуков](web/05-storage-hall.webp)
+### Склад в доме: длинный зал сундуков
+![Склад в доме: длинный зал сундуков](web/05-storage-hall.webp)
 `https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/screenshots/web/05-storage-hall.webp`
 
 ### Вход в склад
 ![Вход в склад](web/06-storage-entrance.webp)
 `https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/screenshots/web/06-storage-entrance.webp`
 
-### Мастерская: печи, наковальня, сундуки
-![Мастерская: печи, наковальня, сундуки](web/07-workshop.webp)
+### Мастерская в доме: печи, наковальня, сундуки
+![Мастерская в доме: печи, наковальня, сундуки](web/07-workshop.webp)
 `https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/screenshots/web/07-workshop.webp`
 
-### Деревня ночью
-![Деревня ночью](web/08-village-night.webp)
+### Мой дом ночью
+![Мой дом ночью](web/08-village-night.webp)
 `https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/screenshots/web/08-village-night.webp`
 
 ### Карта: стройка сверху
@@ -42,6 +42,6 @@
 ![Карта: спавн с порталами](web/10-map-spawn.webp)
 `https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/screenshots/web/10-map-spawn.webp`
 
-### Карта: деревня и мост
-![Карта: деревня и мост](web/11-map-village.webp)
+### Карта: дом и мост
+![Карта: дом и мост](web/11-map-village.webp)
 `https://raw.githubusercontent.com/Hanafubuki-minecraft/hanafubuki-brand/main/screenshots/web/11-map-village.webp`
