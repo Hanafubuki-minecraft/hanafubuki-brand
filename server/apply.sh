@@ -115,6 +115,13 @@ PY
   say "Anti-Xray включён (engine-mode 2)"
 fi
 
+# ---------- TAB: адреса доменами вместо IP ----------
+TAB_CFG="$P/TAB/config.yml"
+if [ -f "$TAB_CFG" ] && grep -q "91.214.31.132" "$TAB_CFG"; then
+  sed -i 's|91\.214\.31\.132:8123|map.hanafubuki.samedy.xyz|g; s|91\.214\.31\.132|mc.samedy.xyz|g' "$TAB_CFG"
+  say "TAB: в подвале домены вместо IP (выполни tab reload)"
+fi
+
 # ---------- тексты своих плагинов: пересоздать в новом стиле, язык ru ----------
 rm -f  "$P/Hanafubuki/messages.yml"
 rm -rf "$P/HanafubukiBlueMapMarkers/lang" "$P/HanafubukiResourceWorld/lang"
