@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import Landing from '../components/Landing.astro';
+import t from '../content/site.ru.json';
+// Английская версия позже: src/content/site.en.json + src/pages/en/index.astro с теми же двумя строками.
+---
+<Base t={t}>
+  <Landing t={t} />
+</Base>

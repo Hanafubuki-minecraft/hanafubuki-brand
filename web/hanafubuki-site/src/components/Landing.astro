@@ -1,0 +1,228 @@
+---
+import Icon from './Icon.astro';
+import config from '../config.json';
+import { md } from '../lib/text';
+
+interface Props { t: any }
+const { t } = Astro.props;
+const { host, bedrockPort } = config.server;
+const L = config.links;
+
+// Только то, что нужно скриптам в браузере.
+const clientData = {
+  status: { ...config.status },
+  text: { ...t.status, copied: t.a11y.copied, copyFailed: t.a11y.copyFailed },
+};
+---
+<a class="skip" href="#main">{t.a11y.skip}</a>
+
+<header class="hero" id="top">
+  <canvas class="petals" aria-hidden="true"></canvas>
+  <nav class="topnav" aria-label={t.a11y.nav}>
+    <a class="topnav__brand" href="#top"><span class="mark" aria-hidden="true">❀</span> Hanafubuki</a>
+    <ul>
+      {t.nav.map((n: any) => <li><a href={n.href}>{n.label}</a></li>)}
+    </ul>
+  </nav>
+  <div class="hero__inner">
+    <img class="hero__logo" src="/logo.svg" width="1024" height="1024" alt={t.a11y.logoAlt} fetchpriority="high" />
+    <p class="hero__kanji" lang="ja">{t.hero.kanji} <span lang="ru">{t.hero.kanjiNote}</span></p>
+    <h1 class="hero__title">{t.hero.title}</h1>
+    <p class="hero__subtitle">{t.hero.subtitle}</p>
+    <p class="hero__platforms"><span class="mark" aria-hidden="true">❀</span> {t.hero.platforms}</p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" href={L.discord}>{t.hero.apply}</a>
+      <a class="btn btn--ghost" href="#join">{t.hero.join}</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="section status" id="status" aria-labelledby="status-title">
+    <div class="wrap">
+      <h2 id="status-title" class="visually-hidden">{t.status.title}</h2>
+      <div class="status__grid">
+        {[['java', t.status.java], ['bedrock', t.status.bedrock]].map(([key, label]) => (
+          <div class="status__card" data-status={key} data-state="loading">
+            <p class="status__head">
+              <span class="status__dot" aria-hidden="true"></span>
+              <span class="status__label">{label}</span>
+              <span class="status__state">{t.status.loading}</span>
+            </p>
+            <dl class="status__facts">
+              <div><dt>{t.status.players}</dt><dd data-field="players">—</dd></div>
+              <div><dt>{t.status.version}</dt><dd data-field="version">—</dd></div>
+            </dl>
+          </div>
+        ))}
+      </div>
+      <p class="status__note">{t.status.updated}</p>
+      <noscript><p class="status__note">{t.status.noscript}</p></noscript>
+    </div>
+  </section>
+
+  <section class="section" id="join" aria-labelledby="join-title">
+    <div class="wrap">
+      <h2 id="join-title"><span class="mark" aria-hidden="true">❀</span> {t.join.title}</h2>
+      <p class="callout" set:html={md(t.join.note)} />
+      <div class="cards cards--2">
+        <article class="card join-card">
+          <h3>{t.join.java.title}</h3>
+          <p class="field-label" id="java-addr-label">{t.join.java.addressLabel}</p>
+          <div class="copyline">
+            <code aria-labelledby="java-addr-label">{host}</code>
+            <button class="btn btn--small" type="button" data-copy={host}>
+              <Icon name="copy" /> {t.join.copy}<span class="visually-hidden">: {host}</span>
+            </button>
+          </div>
+          <ol class="steps">{t.join.java.steps.map((s: string) => <li set:html={md(s)} />)}</ol>
+        </article>
+        <article class="card join-card">
+          <h3>{t.join.bedrock.title}</h3>
+          <p class="field-label" id="be-addr-label">{t.join.bedrock.addressLabel}</p>
+          <div class="copyline">
+            <code aria-labelledby="be-addr-label">{host}</code>
+            <button class="btn btn--small" type="button" data-copy={host}>
+              <Icon name="copy" /> {t.join.copy}<span class="visually-hidden">: {host}</span>
+            </button>
+          </div>
+          <p class="field-label" id="be-port-label">{t.join.bedrock.portLabel}</p>
+          <div class="copyline">
+            <code aria-labelledby="be-port-label">{bedrockPort}</code>
+            <button class="btn btn--small" type="button" data-copy={String(bedrockPort)}>
+              <Icon name="copy" /> {t.join.copy}<span class="visually-hidden">: {bedrockPort}</span>
+            </button>
+          </div>
+          <ol class="steps">{t.join.bedrock.steps.map((s: string) => <li set:html={md(s)} />)}</ol>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <h2 id="features-title"><span class="mark" aria-hidden="true">❀</span> {t.features.title}</h2>
+      <ul class="cards cards--features" role="list">
+        {t.features.items.map((f: any) => (
+          <li class="card feature">
+            <span class="feature__icon"><Icon name={f.icon} /></span>
+            <h3>{f.title}</h3>
+            {f.text && <p set:html={md(f.text)} />}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="rules" aria-labelledby="rules-title">
+    <div class="wrap">
+      <h2 id="rules-title"><span class="mark" aria-hidden="true">❀</span> {t.rules.title}</h2>
+      <div class="cards cards--rules">
+        <article class="card rules">
+          <h3>{t.rules.general.title}</h3>
+          <p class="muted">{t.rules.general.lead}</p>
+          <ol>{t.rules.general.items.map((s: string) => <li set:html={md(s)} />)}</ol>
+          {t.rules.general.notes.map((s: string) => <p class="note"><em set:html={md(s)} /></p>)}
+        </article>
+        <article class="card rules">
+          <h3>{t.rules.server.title}</h3>
+          <ol>{t.rules.server.items.map((s: string) => <li set:html={md(s)} />)}</ol>
+          <p class="rules__after">{t.rules.server.after}</p>
+          {t.rules.server.notes.map((s: string) => <p class="note"><em set:html={md(s)} /></p>)}
+        </article>
+        <article class="card rules">
+          <h3>{t.rules.discord.title}</h3>
+          <p class="muted">{t.rules.discord.lead}</p>
+          <ol>{t.rules.discord.items.map((s: string) => <li set:html={md(s)} />)}</ol>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="pass" aria-labelledby="pass-title">
+    <div class="wrap wrap--narrow">
+      <h2 id="pass-title"><span class="mark" aria-hidden="true">❀</span> {t.pass.title}</h2>
+      {t.pass.text.map((s: string) => <p class="lead" set:html={md(s)} />)}
+
+      <h3>{t.pass.stepsTitle}</h3>
+      <ol class="flow">
+        {t.pass.steps.map((s: string) => <li>{s}</li>)}
+      </ol>
+      <p class="muted">{t.pass.stepsAfter}</p>
+
+      <div class="card form-card">
+        <div class="form-card__head">
+          <h3 id="form-title">{t.pass.formTitle}</h3>
+          <button class="btn btn--small" type="button" data-copy-from="form-text">
+            <Icon name="copy" /> {t.pass.copy}
+          </button>
+        </div>
+        <p class="muted">{t.pass.formHint}</p>
+        <pre id="form-text" aria-labelledby="form-title" tabindex="0"><code>{t.pass.form}</code></pre>
+      </div>
+
+      <p class="center"><a class="btn btn--primary btn--big" href={L.discord}>{t.pass.apply}</a></p>
+    </div>
+  </section>
+
+  <section class="section" id="map" aria-labelledby="map-title">
+    <div class="wrap wrap--narrow center">
+      <h2 id="map-title"><span class="mark" aria-hidden="true">❀</span> {t.map.title}</h2>
+      <p class="muted">{t.map.text}</p>
+      {config.mapReady ? (
+        <p><a class="btn btn--primary" href={L.map}>{t.map.open}</a></p>
+      ) : (
+        <>
+          <p>
+            <span class="btn btn--disabled" aria-disabled="true">
+              {t.map.open} <span class="badge">{t.map.soon}</span>
+            </span>
+          </p>
+          <p class="muted small">{t.map.soonNote} <a href={L.mapFallback}>{L.mapFallback.replace(/^https?:\/\//, '')}</a></p>
+        </>
+      )}
+    </div>
+  </section>
+
+  <section class="section" id="faq" aria-labelledby="faq-title">
+    <div class="wrap wrap--narrow">
+      <h2 id="faq-title"><span class="mark" aria-hidden="true">❀</span> {t.faq.title}</h2>
+      <div class="faq">
+        {t.faq.items.map((f: any) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p set:html={md(f.a)} />
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <p class="footer__brand"><span class="mark" aria-hidden="true">❀</span> Hanafubuki · <span lang="ja">花吹雪</span></p>
+    <ul class="footer__links" role="list">
+      <li><a href={L.discord}><Icon name="discord" /> {t.footer.discord}</a></li>
+      <li><a href={L.github}><Icon name="github" /> {t.footer.github}</a> <span class="dim">· {t.footer.githubNote}</span></li>
+    </ul>
+    <p class="small muted"><a href={L.bacap}>{t.footer.credits}</a></p>
+    <p class="small dim">{t.footer.disclaimer}</p>
+  </div>
+</footer>
+
+<div class="toast" role="status" aria-live="polite"></div>
+
+<script type="application/json" id="client-data" set:html={JSON.stringify(clientData)} />
+
+<script>
+  import { startPetals } from '../scripts/petals';
+  import { startStatus } from '../scripts/status';
+  import { initCopy } from '../scripts/copy';
+
+  const data = JSON.parse(document.getElementById('client-data')!.textContent || '{}');
+  initCopy(data.text);
+  startStatus(data.status, data.text);
+  const canvas = document.querySelector<HTMLCanvasElement>('canvas.petals');
+  if (canvas) startPetals(canvas);
+</script>

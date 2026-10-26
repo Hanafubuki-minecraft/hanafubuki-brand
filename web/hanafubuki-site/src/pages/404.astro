@@ -1,0 +1,12 @@
+---
+import Base from '../layouts/Base.astro';
+import t from '../content/site.ru.json';
+---
+<Base t={t} title={`${t.notFound.title} · Hanafubuki`} noindex>
+  <main class="notfound" id="main">
+    <img src="/logo.svg" width="160" height="160" alt={t.a11y.logoAlt} />
+    <h1>{t.notFound.title}</h1>
+    <p class="muted">{t.notFound.text}</p>
+    <p><a class="btn btn--primary" href="/">{t.notFound.back}</a></p>
+  </main>
+</Base>

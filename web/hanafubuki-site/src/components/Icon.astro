@@ -1,0 +1,21 @@
+---
+// Простые линейные иконки для карточек «Что есть на сервере».
+interface Props { name: string }
+const { name } = Astro.props;
+const paths: Record<string, string> = {
+  pickaxe: '<path d="M4 9c4-5 12-5 16 0"/><path d="M12 6v0"/><path d="M14.5 9.5 5 19a1.4 1.4 0 0 0 2 2l9.5-9.5"/><path d="M12 7l5 5"/>',
+  portal: '<rect x="6" y="3" width="12" height="18" rx="1"/><path d="M9 7c2 1 4 3 4 5s-2 4-4 5"/><path d="M15 8c-1 2-1 5 0 8"/>',
+  map: '<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2z"/><path d="M9 4v14M15 6v14"/>',
+  sit: '<path d="M7 3v9h10"/><path d="M7 12v9M17 12v9"/><path d="M5 12h14"/>',
+  trophy: '<path d="M8 4h8v5a4 4 0 0 1-8 0V4z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M8 21h8M9 17h6v4H9z"/>',
+  sliders: '<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>',
+  sparkle: '<path d="M12 3c.6 4.2 2.8 6.4 7 7-4.2.6-6.4 2.8-7 7-.6-4.2-2.8-6.4-7-7 4.2-.6 6.4-2.8 7-7z"/><path d="M19 16c.2 1.4.9 2.1 2.3 2.3-1.4.2-2.1.9-2.3 2.3-.2-1.4-.9-2.1-2.3-2.3 1.4-.2 2.1-.9 2.3-2.3z"/>',
+  discord: '<path d="M8 7c2.7-.9 5.3-.9 8 0M7 17c3.3 1.3 6.7 1.3 10 0"/><path d="M8 7 6 8c-1.5 3-2 6-1.5 9l2.5 1.5L8 17M16 7l2 1c1.5 3 2 6 1.5 9L17 18.5 16 17"/><circle cx="9.5" cy="12.5" r="1"/><circle cx="14.5" cy="12.5" r="1"/>',
+  github: '<path d="M9 19c-4 1.5-4-2-6-2.5M15 21v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/>',
+  copy: '<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8"/>',
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+};
+---
+<svg class="icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor"
+  stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"
+  set:html={paths[name] ?? ''} />

@@ -1,0 +1,23 @@
+{
+  "site": {
+    "url": "https://hanafubuki.samedy.xyz",
+    "shortUrl": "https://hf.samedy.xyz"
+  },
+  "server": {
+    "host": "mc.samedy.xyz",
+    "bedrockPort": 19132
+  },
+  "links": {
+    "discord": "https://discord.gg/VSaAnM75a",
+    "github": "https://github.com/Hanafubuki-minecraft",
+    "map": "https://map.hanafubuki.samedy.xyz",
+    "mapFallback": "http://91.214.31.132:8123",
+    "bacap": "https://modrinth.com/datapack/blazeandcaves-advancements-pack"
+  },
+  "mapReady": false,
+  "status": {
+    "javaApi": "https://api.mcsrvstat.us/3/mc.samedy.xyz",
+    "bedrockApi": "https://api.mcsrvstat.us/bedrock/3/mc.samedy.xyz:19132",
+    "refreshSeconds": 60
+  }
+}
