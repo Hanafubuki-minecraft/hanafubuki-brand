@@ -39,7 +39,8 @@ publish() {
     if git diff --cached --quiet; then
       echo "  изменений нет"
     else
-      git -c user.name="Hanafubuki" -c user.email="noreply@github.com" commit -q -m "Update site"
+      # Автор коммита — тот, кто запускает скрипт (git config user.name / user.email).
+      git commit -q -m "Update site"
       git push -q "https://x-access-token:${GH_TOKEN}@github.com/$ORG/$repo.git" main 2>&1 | sed "s/${GH_TOKEN}/***/g"
       echo "  код запушен в main"
     fi
