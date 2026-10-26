@@ -30,7 +30,7 @@
 
 ## Ссылки
 
-- Карта мира: http://map.hanafubuki.samedy.xyz:8123
+- Карта мира: https://map.hanafubuki.samedy.xyz
 - Discord: https://discord.gg/VSaAnM75a
 
 ## Общие правила
