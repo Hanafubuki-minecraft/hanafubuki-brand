@@ -41,7 +41,7 @@
       "title": "Основные команды",
       "description": "`/spawn` — на спавн\n`/home` — к своей кровати\n`/tpa [ник]` · `/tpaaccept` — попроситься к игроку · принять\n`/resources` — в мир ресурсов\n`/marker add [название]` — метка на карте\n`/msg [ник]` · `/r` — личные сообщения\n`/guide` — книга новичка\n`/help` — все доступные команды",
       "footer": {
-        "text": "Достижения — BlazeandCave's Advancements Pack (Cavinator1)"
+        "text": "Достижения — BlazeandCave's Advancements Pack (Cavinator1) · Hanafubuki не связан с Mojang и Microsoft."
       }
     }
   ],
